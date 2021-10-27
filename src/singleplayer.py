@@ -2,13 +2,6 @@ import os
 import random
 
 
-def clear_screen():
-    if os.name == 'posix':
-        os.system('clear')
-    else:
-        os.system('cls')
-
-
 class single_player:
 
     def __init__(self):
@@ -27,6 +20,13 @@ class single_player:
             self.computer_logo = 'O'
         else:
             self.computer_logo = 'X'
+
+    @staticmethod
+    def clear_screen():
+        if os.name == 'posix':
+            os.system('clear')
+        else:
+            os.system('cls')
 
     def board_printer(self):
         print('-' * 11)
@@ -112,7 +112,6 @@ class single_player:
             self.filler(computer_choice, self.computer_logo)
             self.board_printer()
 
-    # returns 0 if computer wins, 1 if user does and 2 in the draw scenario
     def result(self):
         if self.winner(self.logo):
             print('player won')
@@ -122,6 +121,6 @@ class single_player:
             print('draw')
 
 
-clear_screen()
 game = single_player()
+game.clear_screen()
 game.main_game()
