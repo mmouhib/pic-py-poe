@@ -9,7 +9,7 @@ def clear_screen():
         os.system('cls')
 
 
-class game:
+class single_player:
 
     def __init__(self):
         self.board = [
@@ -52,7 +52,7 @@ class game:
 
     def player_choice(self):
         while 1:
-            choice = input('')
+            choice = input('your choice: ')
             if self.check_valid_choice(choice):
                 break
         return choice
@@ -76,29 +76,44 @@ class game:
         line_two = self.board[1]
         line_three = self.board[2]
 
-        # 'lines' checks if three values of given str are identical
-        def lines(ls):
-            if ls[0] == ls[1] == ls[2] == symbol:
-                return True
-            return False
+        # Vertical
+        if line_one[0] == line_two[0] == line_three[0] == symbol:
+            return True
+        elif line_one[1] == line_two[1] == line_three[1] == symbol:
+            return True
+        elif line_one[2] == line_two[2] == line_three[2] == symbol:
+            return True
+        # Horizontal
+        elif line_one[0] == line_one[1] == line_one[2] == symbol:
+            return True
+        elif line_two[0] == line_two[1] == line_two[2] == symbol:
+            return True
+        elif line_three[0] == line_three[1] == line_three[2] == symbol:
+            return True
+        # diagonals
+        elif line_one[0] == line_two[1] == line_three[2] == symbol:
+            return True
+        elif line_one[2] == line_two[1] == line_three[0] == symbol:
+            return True
+        return False
 
-        if lines(line_one) or lines(line_two) or lines(line_three) or \
-                lines([line_one[0], line_two[0], line_three[0]]) or \
-                lines([line_one[0], line_two[1], line_three[2]]) or lines([line_one[2], line_two[1], line_three[0]]):
+    def draw(self):
+        if self.filled_board() and not (self.winner(self.logo) or self.winner(self.computer_logo)):
             return True
         return False
 
     def main_game(self):
-
         while 1:
-            self.board_printer()
             player_choice = self.player_choice()
             self.filler(player_choice, self.logo)
+            if self.draw() or self.winner(self.logo) or self.winner(self.computer_logo):
+                break
             computer_choice = self.computer_choice()
             self.filler(computer_choice, self.computer_logo)
-            if self.filled_board() or self.winner(self.logo) or self.winner(self.computer_logo):
-                break
+            self.board_printer()
 
+    # returns 0 if computer wins, 1 if user does and 2 in the draw scenario
+    def result(self):
         if self.winner(self.logo):
             print('player won')
         elif self.winner(self.computer_logo):
@@ -108,5 +123,5 @@ class game:
 
 
 clear_screen()
-game = game()
+game = single_player()
 game.main_game()
