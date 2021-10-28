@@ -1,4 +1,6 @@
+import os
 import random
+from colors import bcolors
 
 
 class Singleplayer:
@@ -20,13 +22,28 @@ class Singleplayer:
         else:
             self.computer_logo = 'X'
 
+    @staticmethod
+    def clear_screen():
+        if os.name == 'posix':
+            os.system('clear')
+        else:
+            os.system('cls')
+
     def board_printer(self):
-        print('-' * 11)
+        print((bcolors.FAIL + '-' + bcolors.ENDC) * 13)
         for sub_board in self.board:
+            print(bcolors.FAIL + '| ' + bcolors.ENDC, end='')
             for sub_element in sub_board:
-                print(sub_element, end=' | ')
+                if sub_element == self.logo:
+                    print(bcolors.OKBLUE + sub_element +
+                          bcolors.ENDC, end=bcolors.FAIL + ' | ' + bcolors.ENDC)
+                elif sub_element == self.computer_logo:
+                    print(bcolors.WARNING + sub_element +
+                          bcolors.ENDC, end=bcolors.FAIL + ' | ' + bcolors.ENDC)
+                else:
+                    print(sub_element, end=bcolors.FAIL + ' | ' + bcolors.ENDC)
             print()
-            print('-' * 11)
+            print((bcolors.FAIL + '-' + bcolors.ENDC) * 13)
 
     def check_valid_choice(self, choice):
         for sub_board in self.board:
@@ -95,14 +112,23 @@ class Singleplayer:
         return False
 
     def main_game(self):
+        self.clear_screen()
+        self.board_printer()
         while 1:
+            if self.draw() or self.winner(self.logo) or self.winner(self.computer_logo):
+                self.clear_screen()
+                break
             player_choice = self.player_choice()
             self.filler(player_choice, self.logo)
             if self.draw() or self.winner(self.logo) or self.winner(self.computer_logo):
+                self.clear_screen()
                 break
             computer_choice = self.computer_choice()
             self.filler(computer_choice, self.computer_logo)
+            self.clear_screen()
             self.board_printer()
+            print(f'Player choice: {player_choice}')
+            print(f'Computer choice: {computer_choice}')
 
     def result(self):
         if self.winner(self.logo):

@@ -39,10 +39,10 @@ if __name__ == '__main__':
         game.main_game()
 
     if game.result() == 0:
-        print('Player 1: ')
+        print('Player 1 result: ')
         print(bcolors.OKBLUE + result.win + bcolors.ENDC)
     elif game.result() == 1:
-        print('Player 1: ')
+        print('Player 1 result: ')
         print(bcolors.FAIL + result.loss + bcolors.ENDC)
     else:
         print(bcolors.OKGREEN + result.draw + bcolors.ENDC)
