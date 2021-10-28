@@ -15,9 +15,3 @@ class Multiplayer(Singleplayer):
             player_two_choice = self.player_choice()
             self.filler(player_two_choice, self.computer_logo)
             self.board_printer()
-
-
-if __name__ == '__main__':
-    game = Multiplayer()
-    game.clear_screen()
-    game.main_game()

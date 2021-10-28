@@ -1,4 +1,3 @@
-import os
 import random
 
 
@@ -20,13 +19,6 @@ class Singleplayer:
             self.computer_logo = 'O'
         else:
             self.computer_logo = 'X'
-
-    @staticmethod
-    def clear_screen():
-        if os.name == 'posix':
-            os.system('clear')
-        else:
-            os.system('cls')
 
     def board_printer(self):
         print('-' * 11)
@@ -119,9 +111,3 @@ class Singleplayer:
             print('computer won')
         else:
             print('draw')
-
-
-if __name__ == '__main__':
-    game = Singleplayer()
-    game.clear_screen()
-    game.main_game()
