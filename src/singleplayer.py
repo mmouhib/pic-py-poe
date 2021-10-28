@@ -106,8 +106,7 @@ class Singleplayer:
 
     def result(self):
         if self.winner(self.logo):
-            print('player won')
+            return 0
         elif self.winner(self.computer_logo):
-            print('computer won')
-        else:
-            print('draw')
+            return 1
+        return 2
