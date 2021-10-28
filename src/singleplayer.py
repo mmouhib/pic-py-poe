@@ -2,7 +2,7 @@ import os
 import random
 
 
-class single_player:
+class Singleplayer:
 
     def __init__(self):
         self.board = [
@@ -121,6 +121,7 @@ class single_player:
             print('draw')
 
 
-game = single_player()
-game.clear_screen()
-game.main_game()
+if __name__ == '__main__':
+    game = Singleplayer()
+    game.clear_screen()
+    game.main_game()
