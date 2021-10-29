@@ -7,7 +7,7 @@ import result
 import os
 
 
-def clear_screen():
+def clrsrc():
     if os.name == 'posix':
         os.system('clear')
     else:
@@ -15,6 +15,8 @@ def clear_screen():
 
 
 if __name__ == '__main__':
+    clrsrc()
+
     print(bcolors.HEADER + result.title + bcolors.ENDC)
     print("""
     make your choice:
@@ -27,8 +29,7 @@ if __name__ == '__main__':
         if choice in ('1', '2'):
             break
 
-    loading.loading()
-    clear_screen()
+    clrsrc()
 
     if choice == '1':
         game = Singleplayer()

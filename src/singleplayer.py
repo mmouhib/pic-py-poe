@@ -11,7 +11,6 @@ class Singleplayer:
             ['4', '5', '6'],
             ['7', '8', '9']
         ]
-        self.name = input('name: ')
         while 1:
             self.logo = input('logo: ')
             if self.logo.upper() == 'X' or self.logo.upper() == 'O':
